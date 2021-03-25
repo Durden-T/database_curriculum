@@ -49,7 +49,7 @@ local:
 mysql:
   path: 127.0.0.1:3306
   config: charset=utf8mb4&parseTime=True&loc=Local
-  db-name: gva
+  db-name: lte
   username: root
   password: k!2a7Lrn3
   max-idle-conns: 0
@@ -94,7 +94,7 @@ zap:
   prefix: '[GIN-VUE-ADMIN]'
   director: log
   link-name: latest_log
-  showLine: true
+  showLine: false
   encode-level: LowercaseColorLevelEncoder
   stacktrace-key: stacktrace
   log-in-console: true

@@ -15,7 +15,7 @@ var Admin = new(admin)
 type admin struct{}
 
 var admins = []model.SysUser{
-	{GVA_MODEL: global.GVA_MODEL{ID: 1, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "init", Password: "e10adc3949ba59abbe56e057f20f883e", NickName: "初始化用户", HeaderImg: "http://qmplusimg.henrongyi.top/gva_header.jpg", AuthorityId: "888"},
+	{GVA_MODEL: global.GVA_MODEL{ID: 1, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "inituser", Password: "e10adc3949ba59abbe56e057f20f883e", NickName: "初始化用户", HeaderImg: "http://qmplusimg.henrongyi.top/gva_header.jpg", AuthorityId: "888"},
 	{GVA_MODEL: global.GVA_MODEL{ID: 2, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "ignore", Password: "3ec063004a6f31642261936a379fde3d", NickName: "忽略", HeaderImg: "http://qmplusimg.henrongyi.top/1572075907logo.png", AuthorityId: "9528"},
 }
 
