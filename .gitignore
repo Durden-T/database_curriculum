@@ -1,0 +1,4 @@
+server/.idea
+server/go.sum
+server/log
+web/node_modules
