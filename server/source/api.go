@@ -85,6 +85,15 @@ var apis = []model.SysApi{
 	{global.GVA_MODEL{ID: 82, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/excel/loadExcel", "下载excel", "excel", "GET"},
 	{global.GVA_MODEL{ID: 83, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/excel/exportExcel", "导出excel", "excel", "POST"},
 	{global.GVA_MODEL{ID: 84, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/excel/downloadTemplate", "下载excel模板", "excel", "GET"},
+
+	{global.GVA_MODEL{ID: 10001, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/businessQuery/getTbcellList", "获取tbcell列表", "businessQuery", "GET"},
+	{global.GVA_MODEL{ID: 10002, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/businessQuery/getAllSectorName", "获取所有小区名称", "businessQuery", "GET"},
+	{global.GVA_MODEL{ID: 10003, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/businessQuery/getTbkpiChartValue", "获取tbkpi图表属性", "businessQuery", "GET"},
+	{global.GVA_MODEL{ID: 10004, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/dataManage/importCSVtoDB", "将csv导入数据库", "dataManage", "PUT"},
+	{global.GVA_MODEL{ID: 10005, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/dataManage/exportDBtoCSV", "将数据库导出为csv", "dataManage", "POST"},
+	{global.GVA_MODEL{ID: 10006, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/businessQuery/getAllEnodebName", "获取所有基站名称", "businessQuery", "GET"},
+	{global.GVA_MODEL{ID: 10007, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/businessQuery/getTbprbChartValue", "获取tbprb图表属性", "businessQuery", "GET"},
+	{global.GVA_MODEL{ID: 10008, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/dataAnalysis/sectorTripleAnalysis", "重叠覆盖干扰小区三元组分析", "dataAnalysis", "GET"},
 }
 
 //@author: [SliverHorn](https://github.com/SliverHorn)

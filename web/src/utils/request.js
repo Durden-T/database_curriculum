@@ -6,7 +6,7 @@ import router from '@/router/index'
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
-    timeout: 99999
+    timeout: 999999
 })
 let acitveAxios = 0
 let timer

@@ -15,4 +15,5 @@ var (
 	OldAuthorityVerify     = Rules{"OldAuthorityId": {NotEmpty()}}
 	ChangePasswordVerify   = Rules{"Username": {NotEmpty()}, "Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"UUID": {NotEmpty()}, "AuthorityId": {NotEmpty()}}
+	TbkpiChartVerify       = Rules{"type": {NotEmpty()}, "sectorName": {NotEmpty()}, "startTime": {NotEmpty()}, "endTime": {NotEmpty()}}
 )
