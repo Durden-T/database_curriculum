@@ -7,6 +7,7 @@ import (
 	"go.uber.org/zap"
 	"math"
 	"sync"
+	"time"
 )
 
 const importDataSQL = `
@@ -28,16 +29,19 @@ var specialTable = map[string]func() error{
 }
 
 func ImportCSVtoDB(r model.ImportExportTableinfo) error {
+	start := time.Now()
 	err := global.GVA_DB.Exec(fmt.Sprintf(importDataSQL, r.CSVpath, r.TableName)).Error
-	global.GVA_LOG.Info("import finish")
+	global.GVA_LOG.Info("import finish", zap.Duration("import_second", time.Since(start)))
 	if err != nil {
 		return err
 	}
 
 	if fun := specialTable[r.TableName]; fun != nil {
-		return fun()
+		start = time.Now()
+		err = fun()
+		global.GVA_LOG.Info("generate new table finish", zap.Duration("generate_second", time.Since(start)))
 	}
-	return nil
+	return err
 }
 
 func calculateTbprb() error {
