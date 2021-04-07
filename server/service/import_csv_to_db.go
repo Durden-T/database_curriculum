@@ -18,6 +18,7 @@ load data infile '%s' ignore into table %s
 
 const (
 	smallBatch    = 4
+	bigBatch = 16384
 	writeBigBatch = 512
 )
 
@@ -28,6 +29,7 @@ var specialTable = map[string]func() error{
 
 func ImportCSVtoDB(r model.ImportExportTableinfo) error {
 	err := global.GVA_DB.Exec(fmt.Sprintf(importDataSQL, r.CSVpath, r.TableName)).Error
+	global.GVA_LOG.Info("import finish")
 	if err != nil {
 		return err
 	}
@@ -56,29 +58,43 @@ func calculateTbprb() error {
 			global.GVA_LOG.Error("err", zap.Error(err))
 		}
 	}()
-
 	in := global.GVA_DB.Model(&model.Tbprb{})
-	var buffer []*model.Tbprb
-	in.Find(&buffer)
-	var wg sync.WaitGroup
-	for i := 0; i < len(buffer); i += smallBatch {
-		wg.Add(1)
-		go func(buf []*model.Tbprb) {
-			defer wg.Done()
-			tmp := &model.Tbprb{}
-			for _, tbprb := range buf {
-				tmp.StartTime = tbprb.StartTime
-				tmp.EnodebName = tbprb.EnodebName
-				tmp.SectorDescription = tbprb.SectorDescription
-				tmp.SectorName = tbprb.SectorName
-				tbprbSum(tmp, tbprb)
-			}
-
-			tbprbAvg(tmp)
-			resultChan <- tmp
-		}(buffer[i : i+smallBatch])
+	var count int64
+	if err := in.Count(&count).Error; err != nil {
+		return err
 	}
-	wg.Wait()
+	if count > bigBatch {
+		count = bigBatch
+	}
+	buffer := make([]*model.Tbprb, 0, count)
+	var offset int64
+	var wg sync.WaitGroup
+	for {
+		result := in.Offset(int(offset)).Limit(int(count)).Find(&buffer)
+		if result.Error != nil || result.RowsAffected == 0 {
+			break
+		}
+		offset += result.RowsAffected
+		for i := 0; i < len(buffer); i += smallBatch {
+			wg.Add(1)
+			go func(buf []*model.Tbprb) {
+				defer wg.Done()
+				tmp := &model.Tbprb{}
+				for _, tbprb := range buf {
+					tmp.StartTime = tbprb.StartTime
+					tmp.EnodebName = tbprb.EnodebName
+					tmp.SectorDescription = tbprb.SectorDescription
+					tmp.SectorName = tbprb.SectorName
+					tbprbSum(tmp, tbprb)
+				}
+
+				tbprbAvg(tmp)
+				resultChan <- tmp
+			}(buffer[i : i+smallBatch])
+		}
+		wg.Wait()
+		buffer = buffer[:0]
+	}
 
 	close(resultChan)
 	return nil
