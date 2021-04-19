@@ -15,10 +15,10 @@ var Admin = new(admin)
 type admin struct{}
 
 var admins = []model.SysUser{
-	{GVA_MODEL: global.GVA_MODEL{ID: 1, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "ignore", Password: "e10adc3949ba59abbe56e057f20f883e", NickName: "忽略", HeaderImg: "http://qmplusimg.henrongyi.top/gva_header.jpg", AuthorityId: "888"},
-	{GVA_MODEL: global.GVA_MODEL{ID: 2, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "ignore", Password: "3ec063004a6f31642261936a379fde3d", NickName: "忽略", HeaderImg: "http://qmplusimg.henrongyi.top/1572075907logo.png", AuthorityId: "9528"},
+	{GVA_MODEL: global.GVA_MODEL{ID: 1, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "ignore", Password: "$2a$10$uLPOjygh/xceuLxF9mKrIO7HuALfHWHwlZi/nMH2xoChao9Hbz7gy", NickName: "忽略", HeaderImg: "http://qmplusimg.henrongyi.top/gva_header.jpg", AuthorityId: "888"},
+	{GVA_MODEL: global.GVA_MODEL{ID: 2, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "ignore", Password: "$2a$10$uLPOjygh/xceuLxF9mKrIO7HuALfHWHwlZi/nMH2xoChao9Hbz7gy", NickName: "忽略", HeaderImg: "http://qmplusimg.henrongyi.top/1572075907logo.png", AuthorityId: "9528"},
 
-	{GVA_MODEL: global.GVA_MODEL{ID: 10001, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "admin", Password: "e10adc3949ba59abbe56e057f20f883e", NickName: "超级管理员", HeaderImg: "http://qmplusimg.henrongyi.top/1572075907logo.png", AuthorityId: "10001"},
+	{GVA_MODEL: global.GVA_MODEL{ID: 10001, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "admin", Password: "$2a$10$uLPOjygh/xceuLxF9mKrIO7HuALfHWHwlZi/nMH2xoChao9Hbz7gy", NickName: "超级管理员", HeaderImg: "http://qmplusimg.henrongyi.top/1572075907logo.png", AuthorityId: "10001"},
 }
 
 //@author: [SliverHorn](https://github.com/SliverHorn)
