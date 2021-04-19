@@ -40,8 +40,7 @@ func Register(u model.SysUser) (err error, userInter model.SysUser) {
 
 func Login(u *model.SysUser) (err error, userInter *model.SysUser) {
 	var user model.SysUser
-	if err = global.GVA_DB.Where("username = ?", u.Username).Preload("Authority").First(&user).Error;
-	err != nil {
+	if err = global.GVA_DB.Where("username = ?", u.Username).Preload("Authority").First(&user).Error; err != nil {
 		return err, nil
 	}
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password)); err != nil {
@@ -58,8 +57,7 @@ func Login(u *model.SysUser) (err error, userInter *model.SysUser) {
 
 func ChangePassword(u *model.SysUser, newPassword string) (err error, userInter *model.SysUser) {
 	var user model.SysUser
-	if err = global.GVA_DB.Where("username = ?", u.Username).First(&user).Error;
-		err != nil {
+	if err = global.GVA_DB.Where("username = ?", u.Username).First(&user).Error; err != nil {
 		return err, nil
 	}
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(u.Password)); err != nil {
