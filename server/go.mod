@@ -50,7 +50,6 @@ require (
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.19
 	github.com/unrolled/secure v1.0.7
 	go.uber.org/zap v1.10.0
-	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee
 	golang.org/x/image v0.0.0-20210216034530-4410531fe030 // indirect
 	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
 	golang.org/x/sys v0.0.0-20210304124612-50617c2ba197 // indirect

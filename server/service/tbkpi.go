@@ -35,7 +35,7 @@ func GetTbkpiChartValue(r request.Chart) (err error, list interface{}) {
 	// 创建db
 	db := global.GVA_DB.Model(&model.Tbkpi{})
 	var tbkpis []map[string]interface{}
-	err = db.Select("start_time", r.Type).Where("`sector_name` = ?", r.Name).
+	err = db.Debug().Select("start_time", r.Type).Where("`sector_name` = ?", r.Name).
 		Where("start_time between ? and ?", r.StartTime, r.EndTime).Order("start_time asc").Find(&tbkpis).Error
 	if err != nil {
 		return

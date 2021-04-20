@@ -79,36 +79,28 @@ func calculateTbprb() error {
 			break
 		}
 		offset += result.RowsAffected
-
-		savedBuffer := make([]*model.Tbprb, 0, len(buffer))
-		copy(savedBuffer, buffer)
-
-		wg.Add(1)
-		go func(buffer []*model.Tbprb) {
-			defer wg.Done()
-			for i := 0; i < len(buffer); i += smallBatch {
+		for i := 0; i < len(buffer); i += smallBatch {
+			wg.Add(1)
+			go func(buf []*model.Tbprb) {
+				defer wg.Done()
 				tmp := &model.Tbprb{}
-				for index, tbprb := range buffer[i : i+smallBatch] {
-					if index == 0 {
-						tmp.StartTime = tbprb.StartTime
-						tmp.EnodebName = tbprb.EnodebName
-						tmp.SectorDescription = tbprb.SectorDescription
-						tmp.SectorName = tbprb.SectorName
-					}
+				for _, tbprb := range buf {
+					tmp.StartTime = tbprb.StartTime
+					tmp.EnodebName = tbprb.EnodebName
+					tmp.SectorDescription = tbprb.SectorDescription
+					tmp.SectorName = tbprb.SectorName
 					tbprbSum(tmp, tbprb)
 				}
+
 				tbprbAvg(tmp)
 				resultChan <- tmp
-			}
-		}(savedBuffer)
-
+			}(buffer[i : i+smallBatch])
+		}
+		wg.Wait()
 		buffer = buffer[:0]
 	}
 
-	wg.Wait()
-
 	close(resultChan)
-
 	return nil
 }
 
